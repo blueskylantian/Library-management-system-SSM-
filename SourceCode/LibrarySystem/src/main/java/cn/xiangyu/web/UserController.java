@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.xiangyu.dao.UserDao;
-import cn.xiangyu.domain.User;
+import cn.xiangyu.dao.itf.UserDao;
+import cn.xiangyu.entity.User;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/a")
 public class UserController {
 	@Resource
 	private UserDao userDao;
 	
 	@RequestMapping("/view")
     public String view() {
-        return "main/login";
+        return "/login";
     }
 
     @RequestMapping("/indexview")

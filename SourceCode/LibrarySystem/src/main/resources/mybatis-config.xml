@@ -5,6 +5,6 @@
 <configuration>
     <!-- 设置别名 -->
     <typeAliases>
-        <package name="cn.xiangyu.domain" />
+        <package name="cn.xiangyu.entity" />
     </typeAliases>
 </configuration>
