@@ -8,9 +8,9 @@ public class MyAppListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		String path = sce.getServletContext().getContextPath();
-		System.out.println(path);
 		sce.getServletContext().setAttribute("lpath", path);
 		sce.getServletContext().setAttribute("ares", path+"/res");
+		sce.getServletContext().setAttribute("jsp", path+"/WEB-INF/view");
 	}
 
 	@Override

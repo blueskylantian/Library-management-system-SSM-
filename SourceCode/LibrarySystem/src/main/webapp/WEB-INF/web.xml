@@ -15,9 +15,17 @@
 	</context-param>
 	<listener>
 	 	<listener-class>cn.xiangyu.listener.MyAppListener</listener-class>
+	</listener>
+	<!-- Spring监听器 -->
+	<listener>
+		<description>Spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
 
 	<!-- 配置SpringMVC环境 -->
 	<servlet>
@@ -30,6 +38,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
-		<url-pattern>*.action</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
