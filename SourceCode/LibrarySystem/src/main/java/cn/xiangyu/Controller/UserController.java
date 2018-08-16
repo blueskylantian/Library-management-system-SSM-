@@ -1,4 +1,4 @@
-package cn.xiangyu.Conntroller;
+package cn.xiangyu.Controller;
 
 import javax.servlet.http.HttpSession;
 

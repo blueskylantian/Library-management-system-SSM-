@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 
  * 类名：BookPO.java<BR>
  * 
- * @author MC、ZL；<BR>
+ * @author XY；<BR>
  * 
  *         说明：；<BR>
  * <BR>
@@ -64,8 +64,22 @@ public class BookPO implements Serializable {
 	/**
 	 * book_publish；
 	 */
+	
 	private String book_publish;
-		
+	/**
+	 * book_labels	
+	 * 
+	 */
+	private String book_labels;
+	
+	public String getBook_labels() {
+		return book_labels;
+	}
+
+	public void setBook_labels(String book_labels) {
+		this.book_labels = book_labels;
+	}
+
 	public String getBook_introduction() {
 		return this.book_introduction;
 	}

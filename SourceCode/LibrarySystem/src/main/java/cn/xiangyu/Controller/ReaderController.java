@@ -1,4 +1,4 @@
-package cn.xiangyu.Conntroller;
+package cn.xiangyu.Controller;
 
 import java.util.List;
 
@@ -14,6 +14,8 @@ public class ReaderController {
 	@RequestMapping("query")
 	@ResponseBody
 	public List<BookPO> querybook() {
+		
+		
 		
 		return null;
 		

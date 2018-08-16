@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,7 +26,7 @@
 	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="查询图书" data-href='${lpath}/index'>查询图书</span>
+				<li class="active"><span title="我的桌面" data-href="welcome.html">我的桌面</span>
 					<em></em></li>
 			</ul>
 		</div>
@@ -41,7 +40,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display: none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="${lpath}/index"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
 		</div>
 	</div>
 	</section>
@@ -56,7 +55,7 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
-		src="${ares}/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+		src="lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			/*$("#min_title_list li").contextMenu('Huiadminmenu', {

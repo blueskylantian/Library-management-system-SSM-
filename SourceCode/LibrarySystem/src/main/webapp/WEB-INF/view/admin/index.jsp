@@ -27,7 +27,7 @@
 	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="我的桌面" data-href='${lpath}/index'>我的桌面</span>
+				<li class="active"><span title="查询图书" data-href='${lpath}/index'>查询图书</span>
 					<em></em></li>
 			</ul>
 		</div>
