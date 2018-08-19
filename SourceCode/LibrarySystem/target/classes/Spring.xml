@@ -37,6 +37,6 @@
     <!-- 设置AOP，让Spring自动对目标生成代理，需要使用AspectJ表达式 -->
     <aop:config proxy-target-class="true">
         <!-- 切面：整合切入点和通知 -->
-        <aop:advisor advice-ref="txAdvice" pointcut="within(cn.xiangyu.Controller..*)" />
+        <!-- <aop:advisor advice-ref="txAdvice" pointcut="within(cn.xiangyu.Controller..*)" /> -->
     </aop:config>
 </beans>

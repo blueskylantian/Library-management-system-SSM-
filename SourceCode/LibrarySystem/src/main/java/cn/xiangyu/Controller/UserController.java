@@ -19,12 +19,12 @@ public class UserController {
 	
 	@RequestMapping("/login")
     public String view() {
-        return "/admin/index";
+        return "/reader/index";
     }
 
     @RequestMapping("/index")
     public String index() {
-        return "/admin/desktop";
+        return "/reader/desktop";
     }
 
     @RequestMapping(value = "/logins", method = RequestMethod.POST)

@@ -7,7 +7,7 @@
     <!-- 定义数据源Bean -->
     <!-- Druid -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="url" value="jdbc:mysql://localhost:3306/temp" />
+        <property name="url" value="jdbc:mysql://localhost:3306/library" />
         <property name="username" value="root" />
         <property name="password" value="xiangyu" />
     </bean>
