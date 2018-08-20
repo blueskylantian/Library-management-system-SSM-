@@ -49,7 +49,6 @@
 
 						var id = row.book_id;
 						var url = "${ lpath}/reader/lendbook?id="+id;
-						//	url: "${ lpath}/reader/queryById?id=" + id,
 						layer_show("借阅图书",url,'','510');
 					} else {
 						layer.alert('馆藏数量太少，无法借阅', {icon: 6});

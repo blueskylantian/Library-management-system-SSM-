@@ -6,5 +6,11 @@
     <!-- 设置别名 -->
     <typeAliases>
         <package name="cn.xiangyu.entity" />
-    </typeAliases>
+    </typeAliases>>
+    <!-- <properties>
+        <property name="dialect" value="mysql" />
+    </properties>
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+    </settings> -->
 </configuration>

@@ -2,8 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xiangyu.dao.itf.ReaderDao">
+	<resultMap type="cn.xiangyu.entity.BorrowPO" id="BorrowMap">
+		<association column="book_id" property="book"
+			javaType="cn.xiangyu.entity.BookPO"
+		></association>
+	</resultMap>
     <select id="tempQueryBook" parameterType="string" resultType="string">
         SELECT book_name FROM book WHERE
         <if test="kw !=null and kw != ''"> book_name LIKE concat('%',#{kw},'%')</if>
     </select>
+    <select id="queryBook" parameterType="string" resultType="BookPO">
+        SELECT * FROM book 
+        <where>
+        <if test="name !=null and name != ''"> book_name LIKE concat('%',#{name},'%')</if>
+        </where>
+    </select>
+    <select id="queryBookById" parameterType="string" resultType="BookPO">
+        SELECT * FROM book WHERE book_id = #{id};  
+    </select>
+    <select id="verifyAccount" parameterType="string" resultType="AccountPO">
+        SELECT reader_id FROM account WHERE account_name = #{username} and account_password = #{password};  
+    </select>
+    <select id="queryReaderById" parameterType="int" resultType="ReaderPO">
+        SELECT * FROM reader WHERE reader_id = #{id};  
+    </select>
+    <update id="finshlend" parameterType="String">
+        update reader set reader_lendnum=reader_lendnum+1 where reader_id = #{readerId}
+    </update>
+    <update id="decBookAmount" parameterType="String">
+        update book set book_amount=book_amount-1 where book_id = #{bookId}
+    </update>
+    <insert id="insertBorrow" parameterType="BorrowPO">
+ 		INSERT INTO borrow(reader_id,borrow_num,borrow_date,remark,book_id,borrow_return,borrow_type) 
+		VALUES(#{reader_id},#{borrow_num},#{borrow_date},#{remark},#{book_id},#{borrow_return},#{borrow_type}) 
+    </insert>
+    <select id="queryBorrowByReaderId" parameterType="java.lang.Integer" resultMap="BorrowMap">
+    	 SELECT * FROM borrow where reader_id = #{readerId}
+    </select>
+    
 </mapper>
