@@ -20,4 +20,6 @@ public interface ReaderDao {
 	int decBookAmount(@Param("bookId")String bookId);
 	List<BorrowPO> queryBorrowByReaderId(@Param("readerId")int readerId);
 	BookPO selectbookById(int book_id);
+	void updateBorrow(BorrowPO borrow);
+	void updateReader(ReaderPO reader);
 }

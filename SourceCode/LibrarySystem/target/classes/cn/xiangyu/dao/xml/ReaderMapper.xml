@@ -40,5 +40,15 @@
     <select id="selectbookById" parameterType="java.lang.Integer" resultType="BookPO">
 		SELECT * FROM  book where book_id = #{book_id}
 	</select>
-    
+    <update id="updateBorrow" parameterType="BorrowPO">
+    	UPDATE borrow SET reader_id=#{reader_id},borrow_num=#{borrow_num},
+    	borrow_date=#{borrow_date},remark=#{remark},<if test="book_id !=null and book_id != ''">book_id=#{book_id},</if>
+    	borrow_return=#{borrow_return},borrow_type=#{borrow_type} 
+    	WHERE borrow_id=#{borrow_id}
+    </update>
+    <update id="updateReader" parameterType="ReaderPO">
+    	UPDATE reader SET reader_type=#{reader_type},reader_name=#{reader_name},
+    	reader_credit=#{reader_credit},remark=#{remark},reader_lendnum=#{reader_lendnum} 
+    	WHERE reader_id=#{reader_id}
+    </update>
 </mapper>

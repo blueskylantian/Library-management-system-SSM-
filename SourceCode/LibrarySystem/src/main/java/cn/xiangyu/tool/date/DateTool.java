@@ -1,5 +1,6 @@
 package cn.xiangyu.tool.date;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,5 +17,23 @@ public class DateTool {
 		  String reStr = sdf.format(dt1);
 		 // System.out.println(reStr);
 		  return reStr;
+	}
+	
+	public static boolean dateCompare(Date time,String returntime) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date returndate;
+		try {
+			returndate = sdf.parse(returntime);
+			int res = time.compareTo(returndate);
+			if (res >= 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

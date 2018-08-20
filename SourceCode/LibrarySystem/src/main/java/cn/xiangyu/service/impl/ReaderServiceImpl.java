@@ -1,5 +1,6 @@
 package cn.xiangyu.service.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,6 +69,11 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 			ReaderPO reader = dao.queryReaderById(readId);
 			Integer reader_type = reader.getReader_type();
 			String reader_name = reader.getReader_name();
+			if(!checkDate(readId)) {
+				//如果有书本逾期，将读者状态置为0违规
+				reader.setReader_type(0);
+				dao.updateReader(reader);
+			}
 			if(reader.getReader_credit() == 0) {
 				return "有违规记录，请处理后再进行借阅";
 			}else if (reader_type == 0) {
@@ -86,7 +92,31 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 			return "验证失败";
 		}
 	@Override
-	public void finshlend(String bookId,String readerId) {
+	public void finshlend(String bookId,String readerId,SettingPO setting) {
+		//获取续借可以增加的天数
+		int lenddays= setting.getLend_days();
+		
+		List<BorrowPO> list = dao.queryBorrowByReaderId(Integer.valueOf(readerId));
+		//查询读者是否已经借阅过这本书，有的话，只要更新一下就可以了
+		
+		for (BorrowPO po : list) {
+			if(po.getBook().getBook_id() == Integer.valueOf(bookId)) {	
+				try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Date time = sdf.parse(po.getBorrow_return());
+					String returnDate = DateTool.dateCount(time, 0, 0, lenddays);
+					//更新借阅表的归还日期
+					po.setBorrow_return(returnDate);
+					po.setBorrow_num(po.getBorrow_num()+1);
+					dao.updateBorrow(po);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return;
+			}
+		}
+		//没有的话，就新增
 		//修改读者的图书借阅数量
 		dao.finshlend(readerId);
 		//扣除图书的库藏数量
@@ -94,8 +124,7 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 		//生成借阅记录
 		Date time = Calendar.getInstance().getTime();
 		String date=new SimpleDateFormat("yyyy-MM-dd").format(time);
-		
-		String returnDate = DateTool.dateCount(time, 0, 0, 30);
+		String returnDate = DateTool.dateCount(time, 0, 0, lenddays);
 		
 		BorrowPO borrow = new BorrowPO();
 		borrow.setBook_id(Integer.valueOf(bookId));
@@ -106,12 +135,51 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 		borrow.setBorrow_num(0);
 		dao.insertBorrow(borrow);
 	}
-
+	/**
+	 * 读者的续借和查询操作
+	 */
 	@Override
 	public List<BorrowPO> queryReaderbooks(int readerId) {
+		ReaderPO reader = dao.queryReaderById(readerId);
+		if(!checkDate(readerId)) {
+			//如果有书本逾期，将读者状态置为0违规
+			System.out.println("有书本逾期");
+			reader.setReader_credit(0);
+			dao.updateReader(reader);
+		}
 		List<BorrowPO> list = dao.queryBorrowByReaderId(readerId);
+		//日期的校验
 		return list;
 	}
 
-	
+	/**
+	 * 校验当前读者的图书是否有逾期,如果有就修改读者状态，以及借阅图书的状态
+	 * 
+	 */
+	public boolean checkDate(int readerId){
+		List<BorrowPO> list = dao.queryBorrowByReaderId(readerId);
+		boolean flag = true;
+		if(list != null) {
+			for (BorrowPO po : list) {
+				//获得该读者的所有正常状态的借阅书本
+				if(po.getBorrow_type() == 0){
+					//获得应该归还的日期
+					String return_day = po.getBorrow_return();
+					//获得当前日期
+					Date time = Calendar.getInstance().getTime();
+					System.out.println(DateTool.dateCompare(time, return_day));
+					//比较，逾期是true
+					if(DateTool.dateCompare(time, return_day)) {
+						//有书本逾期，改变书本状态
+						po.setBorrow_type(-1);
+						dao.updateBorrow(po);
+						flag = false;
+					}
+				}else if(po.getBorrow_type() == -1) {
+					flag = false;
+				}
+			}
+		}
+		return flag;
+	}
 }

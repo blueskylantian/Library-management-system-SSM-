@@ -97,7 +97,7 @@ public class ReaderController {
 				//写入读者信息，扣除库藏数量，生成借阅记录
 				String[] split = msg.split(":");
 				String reader_name = split[0];
-				service.finshlend(book_id,String.valueOf(readId));
+				service.finshlend(book_id,String.valueOf(readId),setting);
 				jsonMsg = "{msg:\"借阅成功\",name:\""+reader_name+"\"}";
 				return JSONObject.fromObject(jsonMsg);
 			}

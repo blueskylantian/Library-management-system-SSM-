@@ -12,6 +12,6 @@ public interface ReaderServiceItf {
 	BookPO queryBookById(String id);
 	int verifyaccount(String username,String password);
 	String verifyReader(int readerId,SettingPO setting);
-	void finshlend(String bookId,String readerId);
+	void finshlend(String bookId,String readerId,SettingPO setting);
 	List<BorrowPO> queryReaderbooks(int raderId);
 }
