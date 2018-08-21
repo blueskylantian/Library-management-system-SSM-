@@ -27,7 +27,7 @@
 	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="查询图书" data-href='${lpath}/index'>查询图书</span>
+				<li class="active"><span title="查询图书" data-href='${lpath}/desktop'>查询图书</span>
 					<em></em></li>
 			</ul>
 		</div>
@@ -41,7 +41,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display: none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="${lpath}/index"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="${lpath}/desktop"></iframe>
 		</div>
 	</div>
 	</section>

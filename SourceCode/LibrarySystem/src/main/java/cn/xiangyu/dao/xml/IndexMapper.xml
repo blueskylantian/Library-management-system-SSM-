@@ -3,6 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xiangyu.dao.itf.IndexDao">
     <select id="getSetting" resultType="SettingPO">
-    	select * from setting;
+    	select * from setting where setting_id = 3;
     </select>
 </mapper>

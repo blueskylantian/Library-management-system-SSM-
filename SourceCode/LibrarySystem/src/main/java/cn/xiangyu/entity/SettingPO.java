@@ -106,5 +106,30 @@ public class SettingPO implements Serializable {
 	public void setSetting_id(Integer setting_id) {
 		this.setting_id = setting_id;
 	}
+
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		else {
+			if (obj instanceof SettingPO) {
+				SettingPO s = (SettingPO) obj;
+				if (s.lend_num == this.lend_num && s.fine == this.fine && s.lend_days == this.lend_days
+						&& s.teacher_num == this.teacher_num && s.student_num == this.student_num
+						&& s.remark == this.remark) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "SettingPO [lend_num=" + lend_num + ", fine=" + fine + ", lend_days=" + lend_days + ", teacher_num="
+				+ teacher_num + ", remark=" + remark + ", student_num=" + student_num + ", setting_id=" + setting_id
+				+ "]";
+	}
+	
+	
 	
 }

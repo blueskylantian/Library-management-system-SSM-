@@ -134,7 +134,7 @@ $("#tid").click(function () {
 				} else if(amount == 0){
 					var a = '<span class="label label-success radius">未逾期</span>';
 				}else{
-					var a = '<span class="label label-success radius">已归还</span>'
+					var a = '<span class="label label-success radius">已归还</span>';
 				}
 				return a;
 			}

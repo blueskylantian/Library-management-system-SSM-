@@ -9,7 +9,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="${lpath}/cs" data-title="个人查询&续借"
+					<li><a data-href="${lpath}/reader" data-title="个人查询&续借"
 						href="#">个人查询&续借</a></li>
 				</ul>
 			</dd>

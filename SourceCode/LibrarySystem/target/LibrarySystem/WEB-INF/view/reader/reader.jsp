@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,47 +11,48 @@
 <!-- header部分 -->
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
-	<span class="c-gray en">&gt;</span>
-	更多操作
-	<span class="c-gray en">&gt;</span>
-	个人信息&续借
-	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
-</nav>
-<div class="page-container">
-	<div class="text-c">
-		<input type="text" name="username" id="username" placeholder="用户名" style="width:250px" class="input-text">
-		<input type="password" name="password" id="password" placeholder="密码" style="width:250px" class="input-text">
-		<button name="tid" id="tid" class="btn btn-success" type="button"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
+	<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+	更多操作 <span class="c-gray en">&gt;</span> 个人信息&续借 <a
+		class="btn btn-success radius r"
+		style="line-height: 1.6em; margin-top: 3px"
+		href="javascript:location.replace(location.href);" title="刷新"><i
+		class="Hui-iconfont">&#xe68f;</i></a> </nav>
+	<div class="page-container">
+		<div class="text-c" id="div1">
+			<input type="text" name="username" id="username" placeholder="用户名"
+				style="width: 250px" class="input-text"> <input
+				type="password" name="password" id="password" placeholder="密码"
+				style="width: 250px" class="input-text">
+			<button name="tid" id="tid" class="btn btn-success" type="button">
+				<i class="Hui-iconfont">&#xe665;</i> 查询
+			</button>
+		</div>
+		<div class="mt-20">
+			<table id="table"
+				class="table table-border table-bordered table-hover table-bg table-sort">
+			</table>
+		</div>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20">
-		<span class="l">
-		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-		<a class="btn btn-primary radius" onclick="system_category_add('添加资讯','system-category-add.html')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加栏目</a>
-		</span>
-		<span class="r">共有数据：<strong>54</strong> 条</span>
-	</div>
-	<div class="mt-20">
-		<table id="table" class="table table-border table-bordered table-hover table-bg table-sort">
-		</table>
-	</div>
-</div>
-<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="footer.jsp"></jsp:include>
 
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="${ares}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="${ares}/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="${ares}/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
-<script type="text/javascript" src="${ares}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript" src="${ares}/lib/laypage/1.2/laypage.js"></script>
-<script src="${ares}/lib/datatables/bootstrap.min.js"></script>
-<script src="${ares}/lib/datatables/bootstrap-table.min.js"></script>
-<script src="${ares}/lib/datatables/bootstrap-table-zh-CN.js"></script>
-<script type="text/javascript">
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="${ares}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		src="${ares}/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript"
+		src="${ares}/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript"
+		src="${ares}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript" src="${ares}/lib/laypage/1.2/laypage.js"></script>
+	<script src="${ares}/lib/datatables/bootstrap.min.js"></script>
+	<script src="${ares}/lib/datatables/bootstrap-table.min.js"></script>
+	<script src="${ares}/lib/datatables/bootstrap-table-zh-CN.js"></script>
+	<script type="text/javascript">
 $("#tid").click(function () {
 	var username = $("#username").val();
 	var password = $("#password").val();
-	alert("ok");
 	//var value = $("#tid").val();
 	//alert(value);
 	$("#table").bootstrapTable('destroy');
@@ -65,14 +66,15 @@ $("#tid").click(function () {
 				data:JSON.stringify({"username": username,"password":password}),	
 	            success : function (d) {
 	            	var temp = d.msg;
-			
 						if(temp == "账号或密码错误"){
 							layer.alert(d.msg, {icon: 6});
-						}else{				
-	                   	 	row : d
+						}else{  
+							$("#div1 input").val("");
+	                   	 	alert("给table发送数据");
+	                   	 	row:d
 	                		$('#table').bootstrapTable('load', d);
-						}
-	               
+							$("#table").bootstrapTable('hideLoading'); //隐藏正在加载
+						}   
 	            },
 				error:function(){
 					alert("错误");
@@ -92,35 +94,47 @@ $("#tid").click(function () {
 		clickToSelect: true,    //是否启用点击选中行
 		searchOnEnterKey: true,
 		uniqueId: "id", // 每一行的唯一标识，一般为主键列
-
 		"pageSize": 10,      //每页的记录行数（*）
 		"pageList": [10, 25, 50, 100],  //可供选择的每页的行数（*）
 		"order": [[0, "asc"]],
 		"columns": [{
-			"fidld": 'book_id',
+			"fidld": 'borrow_id',
 			"title": 'id',
 			visible: false
 		}, {
-			"field": 'book_name',
+			"fidld": 'book.book_id',
+			"title": 'bookid',
+			visible: false
+		}, {
+			"field": 'book.book_name',
 			"title": '图书名',
 		}, {
-			"field": 'book_style',
+			"field": 'book.book_style',
 			"title": '类型',
 		}, {
-			"field": 'book_author',
+			"field": 'book.book_author',
 			"title": '作者',
 		}, {
-			"field": 'book_publish',
+			"field": 'book.book_publish',
 			"title": '出版社'
+		},{
+			"field": 'borrow_date',
+			"title": '借阅日期'
+		},{
+			"field": 'borrow_return',
+			"title": '归还日期'
 		},{
 			"title": '状态',
 			"class": "td-manage",
 			formatter: function (value, row, index) {
-				var amount = row.book_amount;
-				if (amount <= 2) {
+				var amount = row.borrow_type;
+
+				if (amount == -1) {
 					var a = '<span class="label radius">逾期</span>';
-				} else {
+				} else if(amount == 0){
 					var a = '<span class="label label-success radius">未逾期</span>';
+				}else{
+					var a = '<span class="label label-success radius">已归还</span>';
 				}
 				return a;
 			}
@@ -134,46 +148,21 @@ $("#tid").click(function () {
 	});
 });
 function AddFunctionAlty(value, row, index) {
+	if(row.borrow_type == 0){
 	return [
-		'<a style="text-decoration: none"title="续借" id="borrow"><i class="Hui-iconfont"></i>借阅</a>'
-	].join("")
+		'<a style="text-decoration: none"title="续借" id="borrow"><i class="Hui-iconfont"></i>续借</a>'
+	].join("")}
 }
 window.operateEvents = {
-	"click #borrow": function (e, value, row, index) {
-		if (row.book_amount > 2) {
-
-			var id = row.book_id;
-			var url = "${ lpath}/reader/lendbook?id="+id;
-			layer_show("借阅图书",url,'','510');
-		} else {
-			layer.alert('馆藏数量太少，无法借阅', {icon: 6});
-		}
+	"click #borrow": function (e, value, row, index){
+	
+		//layer.alert("请到管理员处消除违规状态在进行借阅",{icon: 6});
+	
+		var id = row.book.book_id;
+		var url = "${ lpath}/reader/lendbook?id="+id;
+		layer_show("借阅图书",url,'','510');	
+				
 	},
-} 
-/*系统-栏目-添加*/
-function system_category_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*系统-栏目-编辑*/
-function system_category_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
-}
-/*系统-栏目-删除*/
-function system_category_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});
-	});
 }
 </script>
 </body>

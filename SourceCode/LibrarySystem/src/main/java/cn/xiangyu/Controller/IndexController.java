@@ -26,10 +26,21 @@ public class IndexController {
 		session.setAttribute("setting", setting);
         return "/reader/index";
     }
-	@RequestMapping("/cs")
-	public String ce() {
+	
+	@RequestMapping("/admin")
+	public String admin(){
+		return "/admin/index";
+	}
+	
+	@RequestMapping("/reader")
+	public String reader() {
 		
 		return "/reader/reader";
+	}
+	
+	@RequestMapping("/login")
+	public String login(){
+		return "/admin/login";
 	}
 	
     @RequestMapping("/desktop")

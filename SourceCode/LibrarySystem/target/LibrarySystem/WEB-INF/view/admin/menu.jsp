@@ -4,13 +4,13 @@
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
 			<dt>
-				<i class="Hui-iconfont">&#xe616;</i> 资讯管理<i
+				<i class="Hui-iconfont">&#xe616;</i> 图书管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理"
-						href="javascript:void(0)">资讯管理</a></li>
+					<li><a data-href="article-list.html" data-title="图书管理"
+						href="javascript:void(0)">图书管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -28,31 +28,27 @@
 		</dl>
 		<dl id="menu-product">
 			<dt>
-				<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
+				<i class="Hui-iconfont">&#xe620;</i> 读者管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="product-brand.html" data-title="品牌管理"
-						href="javascript:void(0)">品牌管理</a></li>
-					<li><a data-href="product-category.html" data-title="分类管理"
-						href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="product-list.html" data-title="产品管理"
-						href="javascript:void(0)">产品管理</a></li>
+					<li><a data-href="product-brand.html" data-title="归还图书"
+						href="javascript:void(0)">归还图书</a></li>
+					<li><a data-href="product-category.html" data-title="缴纳罚款"
+						href="javascript:void(0)">缴纳罚款</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-comments">
 			<dt>
-				<i class="Hui-iconfont">&#xe622;</i> 评论管理<i
+				<i class="Hui-iconfont">&#xe622;</i> 图书馆规则设置<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="http://h-ui.duoshuo.com/admin/"
-						data-title="评论列表" href="javascript:;">评论列表</a></li>
-					<li><a data-href="feedback-list.html" data-title="意见反馈"
-						href="javascript:void(0)">意见反馈</a></li>
+					<li><a data-href="${lpath }/setting"
+						data-title="规则设置" href="javascript:;">规则设置</a></li>
 				</ul>
 			</dd>
 		</dl>
