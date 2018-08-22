@@ -18,7 +18,7 @@ public class IndexController {
 	@Autowired
 	private IndexServiceItf service;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/readerindex")
     public String view(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		List<SettingPO> list = service.getSetting();
@@ -27,24 +27,18 @@ public class IndexController {
         return "/reader/index";
     }
 	
+	@RequestMapping("/admin/desktop")
+	public String admindesktop() {
+		return "/admin/desktop";
+	}
+	
 	@RequestMapping("/admin")
 	public String admin(){
 		return "/admin/index";
 	}
-	
-	@RequestMapping("/reader")
-	public String reader() {
 		
-		return "/reader/reader";
-	}
-	
 	@RequestMapping("/login")
 	public String login(){
 		return "/admin/login";
 	}
-	
-    @RequestMapping("/desktop")
-    public String index() {
-        return "/reader/desktop";
-    }
 }

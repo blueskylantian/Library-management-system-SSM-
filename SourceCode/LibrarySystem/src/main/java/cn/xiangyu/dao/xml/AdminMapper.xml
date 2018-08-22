@@ -2,12 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xiangyu.dao.itf.AdminDao">
+	<resultMap type="cn.xiangyu.entity.BookPO" id="BookMaps">
+		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbooktypeById" column="type_id" property="type"></association>
+	</resultMap>
+	<select id="showBooks" resultMap="BookMaps">
+		SELECT * FROM book
+	</select>
+	<select id="queryBookByID" parameterType="String" resultMap="BookMaps">
+		SELECT * FROM book where book_id = #{bookId}
+	</select>
+	
+	<select id="getAllBooktypes" resultType="BooktypesPO">
+		SELECT * FROM booktypes
+	</select>
+	
+	<delete id="delbook" parameterType="java.lang.Integer">
+		delete from book where book_id = #{bookId}
+	</delete>
 	<select id="login" parameterType="string" resultType="AccountPO">
         SELECT reader_id FROM account WHERE account_name = #{username} and account_password = #{password};  
     </select>
     <select id="querySettingById" parameterType="java.lang.Integer" resultType="SettingPO">
         SELECT * FROM setting WHERE setting_id = #{settingId}; 
     </select>
+    <insert id="insertBook" parameterType="BookPO">
+    	INSERT INTO book(book_introduction,book_num,book_price,type_id,book_amount,book_author,remark,book_labels,book_name,book_publish) 
+		VALUES(#{book_introduction},#{book_num},#{book_price},#{type_id},#{book_amount},#{book_author},#{remark},#{book_labels},#{book_name},#{book_publish}) 
+    </insert>
+    <update id="updateBook" parameterType="BookPO">
+    	UPDATE book 
+    	<trim prefix="set" suffixOverrides=",">
+    	<if test="book_introduction !=null and book_introduction != ''">book_introduction=#{book_introduction},</if>
+    	<if test="book_num !=null and book_num != ''">book_num=#{book_num},</if>
+    	<if test="book_price !=null and book_price != ''">book_price=#{book_price},</if>
+    	<if test="type_id !=null and type_id != ''">type_id=#{type_id},</if>
+    	<if test="book_amount !=null and book_amount != ''">book_amount=#{book_amount},</if>
+    	<if test="book_author !=null and book_author != ''">book_author=#{book_author},</if>
+    	<if test="remark !=null and remark != ''">remark=#{remark},</if>
+    	<if test="book_labels !=null and book_labels != ''">book_labels=#{book_labels},</if>
+    	<if test="book_name !=null and book_name != ''">book_name=#{book_name},</if>
+    	<if test="book_publish !=null and book_publish != ''">book_publish=#{book_publish}</if>
+    	</trim>
+    	WHERE book_id=#{book_id}
+    </update>
     <update id="updateSetting" parameterType="SettingPO" >
     	UPDATE setting
     	 	<trim prefix="set" suffixOverrides=",">

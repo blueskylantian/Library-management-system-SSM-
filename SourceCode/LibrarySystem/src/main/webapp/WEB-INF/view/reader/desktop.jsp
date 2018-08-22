@@ -122,7 +122,7 @@
 							"field": 'book_name',
 							"title": '图书名',
 						}, {
-							"field": 'book_style',
+							"field": 'type.type_name',
 							"title": '类型',
 						}, {
 							"field": 'book_author',

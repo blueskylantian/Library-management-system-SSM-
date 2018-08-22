@@ -9,7 +9,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="图书管理"
+					<li><a data-href="${lpath}/admin/book" data-title="图书管理"
 						href="javascript:void(0)">图书管理</a></li>
 				</ul>
 			</dd>

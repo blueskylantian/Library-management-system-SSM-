@@ -56,6 +56,7 @@ public class BorrowPO implements Serializable {
 	 */
 	private Integer borrow_type;
 	
+	
 	private BookPO book;
 	
 	

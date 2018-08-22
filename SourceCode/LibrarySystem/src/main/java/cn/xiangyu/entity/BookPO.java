@@ -36,6 +36,7 @@ public class BookPO implements Serializable {
 	 */
 	private Integer type_id;
 	
+	private BooktypesPO type;
 	/**
 	 * book_amount；
 	 */
@@ -158,6 +159,22 @@ public class BookPO implements Serializable {
 
 	public void setBook_publish(String book_publish) {
 		this.book_publish = book_publish;
+	}
+
+	public BooktypesPO getType() {
+		return type;
+	}
+
+	public void setType(BooktypesPO type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "BookPO [book_introduction=" + book_introduction + ", book_num=" + book_num + ", book_price="
+				+ book_price + ", type_id=" + type_id + ", type=" + type + ", book_amount=" + book_amount
+				+ ", book_author=" + book_author + ", remark=" + remark + ", book_id=" + book_id + ", book_name="
+				+ book_name + ", book_publish=" + book_publish + ", book_labels=" + book_labels + "]";
 	}
 	
 }

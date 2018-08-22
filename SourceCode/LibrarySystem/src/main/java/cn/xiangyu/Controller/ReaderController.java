@@ -24,6 +24,24 @@ import net.sf.json.JSONObject;
 public class ReaderController {
 	@Autowired
 	private ReaderServiceItf service;
+	
+	/**
+	 * 跳转到读者续借页面
+	 * @return
+	 */
+	@RequestMapping("/reader")
+	public String reader() {
+		
+		return "/reader/reader";
+	}
+	/**
+	 * 跳转到桌面
+	 * @return
+	 */
+	@RequestMapping("/desktop")
+    public String index() {
+        return "/reader/desktop";
+    }
 	/**
 	 * 搜索
 	 * @param name
@@ -113,7 +131,7 @@ public class ReaderController {
 		String password = map.get("password");
 		String jsonMsg;
 		int accountMsg = service.verifyaccount(username, password);
-		if(accountMsg == -1) {
+		if(accountMsg == -1){
 			jsonMsg = "{msg:\"账号或密码错误\"}";
 			return JSONObject.fromObject(jsonMsg);
 		}else{

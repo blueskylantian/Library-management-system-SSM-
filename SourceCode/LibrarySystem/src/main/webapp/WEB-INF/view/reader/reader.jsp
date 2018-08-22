@@ -37,14 +37,10 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 
 	<!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript"
-		src="${ares}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-	<script type="text/javascript"
-		src="${ares}/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
-	<script type="text/javascript"
-		src="${ares}/lib/jquery.validation/1.14.0/validate-methods.js"></script>
-	<script type="text/javascript"
-		src="${ares}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript" src="${ares}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="${ares}/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="${ares}/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript" src="${ares}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 	<script type="text/javascript" src="${ares}/lib/laypage/1.2/laypage.js"></script>
 	<script src="${ares}/lib/datatables/bootstrap.min.js"></script>
 	<script src="${ares}/lib/datatables/bootstrap-table.min.js"></script>
@@ -109,9 +105,6 @@ $("#tid").click(function () {
 			"field": 'book.book_name',
 			"title": '图书名',
 		}, {
-			"field": 'book.book_style',
-			"title": '类型',
-		}, {
 			"field": 'book.book_author',
 			"title": '作者',
 		}, {
@@ -157,7 +150,7 @@ window.operateEvents = {
 	"click #borrow": function (e, value, row, index){
 	
 		//layer.alert("请到管理员处消除违规状态在进行借阅",{icon: 6});
-	
+		
 		var id = row.book.book_id;
 		var url = "${ lpath}/reader/lendbook?id="+id;
 		layer_show("借阅图书",url,'','510');	

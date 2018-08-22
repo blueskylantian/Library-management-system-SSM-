@@ -37,7 +37,7 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 
 	@Override
 	public BookPO queryBookById(String id) {
-		BookPO po = dao.queryBookById(id);
+		BookPO po = dao.selectbookById(Integer.valueOf(id));
 		return po;
 	}
 

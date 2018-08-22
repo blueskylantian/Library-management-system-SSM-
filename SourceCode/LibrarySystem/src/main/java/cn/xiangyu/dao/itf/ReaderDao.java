@@ -12,7 +12,6 @@ import cn.xiangyu.entity.ReaderPO;
 public interface ReaderDao {
 	String[] tempQueryBook(@Param("kw")String kw);
 	List<BookPO> queryBook(@Param("name")String name);
-	BookPO queryBookById(@Param("id")String id);
 	AccountPO verifyAccount(@Param("username")String username,@Param("password")String password);
 	ReaderPO queryReaderById(@Param("id")int id);	
 	void finshlend(@Param("readerId")String readerId);
@@ -22,4 +21,5 @@ public interface ReaderDao {
 	BookPO selectbookById(int book_id);
 	void updateBorrow(BorrowPO borrow);
 	void updateReader(ReaderPO reader);
+	void selectbooktypeById(int type_id);
 }
