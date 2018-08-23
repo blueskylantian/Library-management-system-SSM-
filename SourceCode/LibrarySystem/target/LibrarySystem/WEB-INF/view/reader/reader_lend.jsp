@@ -101,7 +101,6 @@ $(function(){
 					
 				},
 				error:function(){},
-				dataType:"json",
 			});
 
 	});	

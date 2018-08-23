@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.xiangyu.entity.BookPO;
 import cn.xiangyu.entity.BooktypesPO;
+import cn.xiangyu.entity.BorrowPO;
 import cn.xiangyu.entity.SettingPO;
 
 public interface AdminServiceItf {
@@ -16,4 +17,11 @@ public interface AdminServiceItf {
 	List<BooktypesPO> getAllbooktypes();
 	String saveBook(BookPO po);
 	String delBook(String bookId);
+	String verifyReaderBooks(String username,String book_num);
+	List<BorrowPO> showReaderBooks(String bookid,String raderid);
+	String returnBook(String borrowid);
+	Double getFine(String borrowid);
+	String checkReader(String borrowid);
+	String returnLostBook(String borrowid);
+	String insertReceipt(Double fine,String borrowid,int type);
 }

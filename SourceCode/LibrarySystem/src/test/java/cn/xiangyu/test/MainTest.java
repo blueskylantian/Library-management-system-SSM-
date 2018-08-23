@@ -12,9 +12,10 @@ public class MainTest {
 	@Test
 	public void test() {
 		Date time = Calendar.getInstance().getTime();
-		
-			String dateCount = DateTool.dateCount(time, 0, 0, 30);
-			System.out.println(dateCount);
+		String returntime = "2018-10-01";
+			boolean dateCompare = DateTool.dateCompare(time, returntime);
+			System.out.println(dateCompare);
+			//false
 		}
 	}
 

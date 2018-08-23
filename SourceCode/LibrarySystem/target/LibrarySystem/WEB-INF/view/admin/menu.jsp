@@ -9,20 +9,8 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="图书管理"
+					<li><a data-href="${lpath}/admin/book" data-title="图书管理"
 						href="javascript:void(0)">图书管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-picture">
-			<dt>
-				<i class="Hui-iconfont">&#xe613;</i> 图片管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="picture-list.html" data-title="图片管理"
-						href="javascript:void(0)">图片管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -33,8 +21,6 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="product-brand.html" data-title="归还图书"
-						href="javascript:void(0)">归还图书</a></li>
 					<li><a data-href="product-category.html" data-title="缴纳罚款"
 						href="javascript:void(0)">缴纳罚款</a></li>
 				</ul>
@@ -47,32 +33,8 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a data-href="${lpath }/setting"
+					<li><a data-href="${lpath }/admin/setting"
 						data-title="规则设置" href="javascript:;">规则设置</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-member">
-			<dt>
-				<i class="Hui-iconfont">&#xe60d;</i> 会员管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="member-list.html" data-title="会员列表"
-						href="javascript:;">会员列表</a></li>
-					<li><a data-href="member-del.html" data-title="删除的会员"
-						href="javascript:;">删除的会员</a></li>
-					<li><a data-href="member-level.html" data-title="等级管理"
-						href="javascript:;">等级管理</a></li>
-					<li><a data-href="member-scoreoperation.html"
-						data-title="积分管理" href="javascript:;">积分管理</a></li>
-					<li><a data-href="member-record-browse.html" data-title="浏览记录"
-						href="javascript:void(0)">浏览记录</a></li>
-					<li><a data-href="member-record-download.html"
-						data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
-					<li><a data-href="member-record-share.html" data-title="分享记录"
-						href="javascript:void(0)">分享记录</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -116,72 +78,6 @@
 				</ul>
 			</dd>
 		</dl>
-		<dl id="menu-system">
-			<dt>
-				<i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="system-base.html" data-title="系统设置"
-						href="javascript:void(0)">系统设置</a></li>
-					<li><a data-href="system-category.html" data-title="栏目管理"
-						href="javascript:void(0)">栏目管理</a></li>
-					<li><a data-href="system-data.html" data-title="数据字典"
-						href="javascript:void(0)">数据字典</a></li>
-					<li><a data-href="system-shielding.html" data-title="屏蔽词"
-						href="javascript:void(0)">屏蔽词</a></li>
-					<li><a data-href="system-log.html" data-title="系统日志"
-						href="javascript:void(0)">系统日志</a></li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-	<div class="menu_dropdown bk_2" style="display: none">
-		<dl id="menu-aaaaa">
-			<dt>
-				<i class="Hui-iconfont">&#xe616;</i> 二级导航1<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理"
-						href="javascript:void(0)">三级导航</a></li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-
-	<div class="menu_dropdown bk_2" style="display: none">
-		<dl id="menu-bbbbb">
-			<dt>
-				<i class="Hui-iconfont">&#xe616;</i> 二级导航2<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理"
-						href="javascript:void(0)">三级导航</a></li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-
-	<div class="menu_dropdown bk_2" style="display: none">
-		<dl id="menu-ccccc">
-			<dt>
-				<i class="Hui-iconfont">&#xe616;</i> 二级导航3<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理"
-						href="javascript:void(0)">三级导航</a></li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-
 </aside>
 <div class="dislpayArrow hidden-xs">
 	<a class="pngfix" href="javascript:void(0);"

@@ -124,7 +124,7 @@ $(function(){
 	      dataType: "json",
 	      contentType : "application/json;charset=utf-8",
 	      success: function (data) {
-	  			alert("成功");
+	    	  layer.msg(data.msg, { icon: 1, time: 1000 });
 	      }
 	    });
 	  });

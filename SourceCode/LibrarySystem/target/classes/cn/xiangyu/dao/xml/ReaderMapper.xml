@@ -3,7 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xiangyu.dao.itf.ReaderDao">
 	<resultMap type="cn.xiangyu.entity.BorrowPO" id="BorrowMap">
-		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbookById" column="book_id" property="book"></association>	
+		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbookById" column="book_id" property="book"></association>
+		<association select="cn.xiangyu.dao.itf.ReaderDao.queryReaderById" column="reader_id" property="reader"></association>		
 	</resultMap>
 	<resultMap type="cn.xiangyu.entity.BookPO" id="BookMap">
 		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbooktypeById" column="type_id" property="type"></association>
@@ -47,14 +48,27 @@
 	</select>
 	
     <update id="updateBorrow" parameterType="BorrowPO">
-    	UPDATE borrow SET reader_id=#{reader_id},borrow_num=#{borrow_num},
-    	borrow_date=#{borrow_date},remark=#{remark},<if test="book_id !=null and book_id != ''">book_id=#{book_id},</if>
-    	borrow_return=#{borrow_return},borrow_type=#{borrow_type} 
+    	UPDATE borrow
+	    	<trim prefix="set" suffixOverrides=",">
+	    	<if test="reader_id !=null and reader_id != ''">reader_id=#{reader_id},</if>
+	    	<if test="borrow_num !=null and borrow_num != ''">borrow_num=#{borrow_num},</if>
+	    	<if test="borrow_date !=null and borrow_date != ''">borrow_date=#{borrow_date},</if>
+	    	<if test="remark !=null and remark != ''">remark=#{remark},</if>
+	    	<if test="book_id !=null and book_id != ''">book_id=#{book_id},</if>
+	    	<if test="borrow_return !=null and borrow_return != ''">borrow_return=#{borrow_return},</if>
+	    	<if test="borrow_type !=null and borrow_type != ''">borrow_type=#{borrow_type}</if>
+	    	</trim>
     	WHERE borrow_id=#{borrow_id}
     </update>
     <update id="updateReader" parameterType="ReaderPO">
-    	UPDATE reader SET reader_type=#{reader_type},reader_name=#{reader_name},
-    	reader_credit=#{reader_credit},remark=#{remark},reader_lendnum=#{reader_lendnum} 
+    	UPDATE reader 
+    	<trim prefix="set" suffixOverrides=",">
+    	<if test="reader_type !=null and reader_type != ''">reader_type=#{reader_type},</if>
+    	<if test="reader_name !=null and reader_name != ''">reader_name=#{reader_name},</if>
+    	<if test="reader_credit !=null and reader_credit != ''">reader_credit=#{reader_credit},</if>
+    	<if test="remark !=null and remark != ''">remark=#{remark},</if>
+    	<if test="reader_lendnum !=null and reader_lendnum != ''">reader_lendnum=#{reader_lendnum}</if>
+    	</trim>
     	WHERE reader_id=#{reader_id}
     </update>
 </mapper>

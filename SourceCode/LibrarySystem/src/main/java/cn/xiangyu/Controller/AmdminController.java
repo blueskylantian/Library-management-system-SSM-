@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+
+import cn.xiangyu.dao.itf.AdminDao;
 import cn.xiangyu.entity.BookPO;
 import cn.xiangyu.entity.BooktypesPO;
+import cn.xiangyu.entity.BorrowPO;
 import cn.xiangyu.entity.JsonEO;
 import cn.xiangyu.entity.SettingPO;
 import cn.xiangyu.service.itf.AdminServiceItf;
@@ -26,12 +30,112 @@ public class AmdminController {
 	@Autowired
 	private AdminServiceItf service;
 	/**
+	 * 丢失图书后的操作
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("lost")
+	public JSONObject lostBook(@RequestBody Map<String, String> map) {
+		String jsonMsg;
+		String borrowid= map.get("id");
+		String msg = service.returnLostBook(borrowid);
+		//如果产生费用则生成收款单
+		Double fine = service.getFine(borrowid);
+		if(fine > 0) {
+			service.insertReceipt(fine, borrowid,1);
+		}
+		//如无逾期的图书，将读者状态设置成正常
+		service.checkReader(borrowid);
+		if(msg.indexOf("成功") != -1) {
+			jsonMsg = "{msg:\"还书成功\"}";
+			return JSONObject.fromObject(jsonMsg);
+		}else {
+			jsonMsg = "{msg:\"失败\"}";
+			return JSONObject.fromObject(jsonMsg);
+		}
+	}
+	/**
+	 * 获得罚款金额
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("topay")
+	public JSONObject toPayFine(@RequestBody Map<String, String> map) {
+		String Fine;
+		String borrowid= map.get("id");
+		Double fine = service.getFine(borrowid);
+		Fine = "{fine:\""+fine+"\"}";
+		return JSONObject.fromObject(Fine);
+	}
+	/**
+	 * 归还图书
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("returnbook")
+	public JSONObject returnbook(@RequestBody Map<String, String> map) {
+		String jsonMsg;
+		String borrowid= map.get("id");
+		String msg = service.returnBook(borrowid);
+		//如果产生费用，生成收款单
+		
+		Double fine = service.getFine(borrowid);
+		if(fine > 0) {
+			service.insertReceipt(fine, borrowid, 0);
+		}
+		//如无逾期的图书，将读者状态设置成正常
+		service.checkReader(borrowid);
+		
+		if(msg.indexOf("成功") != -1) {
+			jsonMsg = "{msg:\"还书成功\"}";
+			return JSONObject.fromObject(jsonMsg);
+		}else {
+			jsonMsg = "{msg:\"失败\"}";
+			return JSONObject.fromObject(jsonMsg);
+		}
+	}
+	/**
+	 * 查询读者的图书
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/showReaderBooks")
+	public JSONObject showReaderBooks(@RequestBody Map<String,String> map) {
+		String username = map.get("username");
+		String book_num = map.get("book_num");
+		String jsonMsg;
+		String  readerAndBook = service.verifyReaderBooks(username, book_num);
+		if(readerAndBook.indexOf(":") != -1) {
+			String[] split = readerAndBook.split(":");
+			String readerid;
+			String bookid = "";
+			if(split.length == 1) {
+				readerid = split[0];
+			}else {
+				readerid = split[0];
+				bookid = split[1];
+			}
+			List<BorrowPO> list = service.showReaderBooks(bookid, readerid);
+			int totle = list.size();
+			System.out.println(JSONArray.fromObject(list));
+			return JSONObject.fromObject(new JsonEO(totle,list));
+		}else {
+			System.out.println("找不到");
+			jsonMsg = "{msg:\""+readerAndBook+"\"}";
+			return JSONObject.fromObject(jsonMsg);
+		}
+	}
+	/**
 	 * 新增图书和修改图书的跳转
 	 * @return
 	 */
 	@RequestMapping("/editbook")
 	public String editbook(HttpServletRequest request) {
 		String bookid = request.getParameter("bookid");
+		
 		//System.out.println(bookid);
 		if(bookid != "") {
 			BookPO bookpo = service.querybookById(bookid);
@@ -97,7 +201,7 @@ public class AmdminController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("showbooks")
+	@RequestMapping("/showbooks")
 	public JsonEO showBooks(HttpServletRequest request) {
 		//String countbook = service.countbook();
 		List<BookPO> list = service.showBooks();
@@ -107,20 +211,17 @@ public class AmdminController {
 		JsonEO eo = new JsonEO(totle,fromObject);
 		return  eo;
 	}
-	
+	/**
+	 * 保存设置
+	 * @param setting
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/saveSetting")
 	public JSONObject savesrtting(@RequestBody SettingPO setting,HttpServletRequest request){
-			
-//			SettingPO setting =new SettingPO();
-//			setting.setSetting_id(Integer.valueOf(map.get("setting_id")));
-//			setting.setLend_days(Integer.valueOf(map.get("lend_days")));
-//			setting.setLend_num(Integer.valueOf(map.get("lend_num")));
-//			setting.setStudent_num(Integer.valueOf(map.get("student_num")));
-//			setting.setTeacher_num(Integer.valueOf(map.get("teacher_num")));
-//			setting.setFine(Double.valueOf(map.get("fine")));
-//			setting.setRemark(map.get("remark"));
-			
+			String jsonMsg;	
+			jsonMsg = "{msg:\"修改成功\"}";		
 			//更新之前先获得当前配置，并保存
 			SettingPO po = service.showSetting();
 			po.setSetting_id(2);
@@ -129,7 +230,8 @@ public class AmdminController {
 			service.updateSetting(setting);
 			setting(request);
 			
-		return null;
+			
+		return JSONObject.fromObject(jsonMsg);
 	}
 	/**
 	 * 展示图书

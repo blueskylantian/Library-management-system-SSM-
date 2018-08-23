@@ -102,7 +102,7 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 		for (BorrowPO po : list) {
 			if(po.getBook().getBook_id() == Integer.valueOf(bookId)) {	
 				try {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Date time = sdf.parse(po.getBorrow_return());
 					String returnDate = DateTool.dateCount(time, 0, 0, lenddays);
 					//更新借阅表的归还日期
@@ -156,7 +156,7 @@ public class ReaderServiceImpl implements ReaderServiceItf {
 	 * 校验当前读者的图书是否有逾期,如果有就修改读者状态，以及借阅图书的状态
 	 * 
 	 */
-	public boolean checkDate(int readerId){
+	public  boolean checkDate(int readerId){
 		List<BorrowPO> list = dao.queryBorrowByReaderId(readerId);
 		boolean flag = true;
 		if(list != null) {

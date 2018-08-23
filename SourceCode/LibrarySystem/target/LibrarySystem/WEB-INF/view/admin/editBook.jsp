@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,80 +11,89 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 	<span class="c-gray en">&gt;</span>
-	系统管理
-	<span class="c-gray en">&gt;</span>
-	基本设置
+	图书管理
+	<span class="c-gray en"></span>
 	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
 	<form class="form form-horizontal" id="form">
 		<div id="tab-system" class="HuiTab">
 			<div class="tabBar cl">
-				<span>基本设置</span>
-				<span>公告</span>
-				<span>数据备份</span>
-				<span>其他设置</span>
+				<span> ${data.book_id ==''?'新增图书信息':'修改图书信息'}</span>
 			</div>
 			<div class="tabCon">
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2">
 						<span class="c-red">*</span>
-						可借阅的天数：</label>
+						图书编号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" type="hidden;" id="setting_id" name="setting_id"  value="${ data.setting_id}" class="input-text">
-						<input type="text" id="lend_days" name="lend_days" placeholder="" value="${ data.lend_days}" class="input-text">
+						<input type="text" id="lend_days" name="book_num" placeholder="" value="${ data.book_num}" class="input-text">
+						<input type="text" style="display:none" id="book_id" name="book_id"  value="${ data.book_id}">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2">
 						<span class="c-red">*</span>
-						可续借的次数：</label>
+						图书名称：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="lend_num" name="lend_num" placeholder="" value="${ data.lend_num}" class="input-text">
+						<input type="text" id="book_name" name="book_name" placeholder="" value="${ data.book_name}" class="input-text">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2">
 						<span class="c-red">*</span>
-						老师可借阅的图书数量：</label>
+						图书类型：
+					</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="teacher_num" name="teacher_num" placeholder="" value="${ data.teacher_num}" class="input-text">
+						<span class="select-box" style="width:150px">
+							<select class="select" name="type_id" size="1">
+							<c:forEach var="list" items="${ types}" varStatus="x">
+								<option  value="${ list.type_id}" <c:if test="${ list.type_name == data.type.type_name}">selected = "selected"</c:if>>${ list.type_name}</option>
+							</c:forEach>
+							</select>
+						</span>
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2">
 						<span class="c-red">*</span>
-						学生可借阅的图书数量：</label>
+						图书作者：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="student_num" name="student_num" placeholder="" value="${ data.student_num}" class="input-text">
+						<input type="text" id="book_author" name="book_author" placeholder="" value="${ data.book_author}" class="input-text">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2">
 						<span class="c-red">*</span>
-						每逾期一天所付的罚款：</label>
+						出版社：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="fine" name="fine" placeholder="" value="${ data.fine}" class="input-text">
+						<input type="text" id="book_publish" name="book_publish" placeholder="" value="${ data.book_publish}" class="input-text">
 					</div>
 				</div>
-			</div>
-			<div class="tabCon">
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">公告</label>
+					<label class="form-label col-xs-4 col-sm-2">
+						<span class="c-red">*</span>
+						图书价格：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<textarea class="textarea" name="remark" id="remark">${ data.remark}</textarea>
+						<input type="text" id="book_price" name="book_price" placeholder="" value="${ data.book_price}" class="input-text">
 					</div>
 				</div>
-			</div>
-			<div class="tabCon">
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">邮件发送模式：</label>
+					<label class="form-label col-xs-4 col-sm-2">
+						<span class="c-red">*</span>
+						馆藏数量：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text"  class="input-text" value="" id="" name="">
+						<input type="text" id="book_amount" name="book_amount" placeholder="" value="${ data.book_amount}" class="input-text">
 					</div>
-				</div>							
-			</div>
-			<div class="tabCon">
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						<span class="c-red">*</span>
+						备注：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="remark" name="remark" placeholder="" value="${ data.remark}" class="input-text">
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row cl">
@@ -107,6 +117,7 @@
 <script type="text/javascript" src="${ares}/lib/datatables/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript">
 $(function(){
+	var indexs = parent.layer.getFrameIndex(window.name);	
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
@@ -119,12 +130,15 @@ $(function(){
 		alert(JSON.stringify($("#form").serializeJSON()));
 	    $.ajax({
 	      type: "post",
-	      url: "${lpath}/admin/saveSetting",
+	      url: "${lpath}/admin/savebook",
 	      data:JSON.stringify($("#form").serializeJSON()),
 	      dataType: "json",
 	      contentType : "application/json;charset=utf-8",
 	      success: function (data) {
-	    	  layer.msg(data.msg, { icon: 1, time: 1000 });
+	    		layer.confirm(data.msg, function (index) {
+	    			window.parent.location.reload(); //刷新父页面
+	    			parent.layer.close(indexs);
+				});
 	      }
 	    });
 	  });

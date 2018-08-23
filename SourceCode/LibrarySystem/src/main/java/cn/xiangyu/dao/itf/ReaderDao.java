@@ -22,4 +22,6 @@ public interface ReaderDao {
 	void updateBorrow(BorrowPO borrow);
 	void updateReader(ReaderPO reader);
 	void selectbooktypeById(int type_id);
+	List<BorrowPO> queryBorrowsByBookidAndReaderid();
+	
 }

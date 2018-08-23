@@ -5,16 +5,41 @@
 	<resultMap type="cn.xiangyu.entity.BookPO" id="BookMaps">
 		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbooktypeById" column="type_id" property="type"></association>
 	</resultMap>
+	<resultMap type="cn.xiangyu.entity.BorrowPO" id="BorrowAllMap">
+		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbookById" column="book_id" property="book"></association>
+		<association select="cn.xiangyu.dao.itf.ReaderDao.queryReaderById" column="reader_id" property="reader"></association>		
+	</resultMap>
+	<select id="queryBorrowsByBookidAndReaderid" resultMap="BorrowAllMap">
+		SELECT * FROM borrow 
+		<where>
+		 	<if test="bookid !=null and bookid != ''">book_id = #{bookid}</if>
+		 	and reader_id = #{readerid}
+		</where>
+	</select>
+	<select id="queryBorrowByid" parameterType="String" resultMap="BorrowAllMap">
+		SELECT * FROM borrow WHERE borrow_id = #{borrowid}
+	</select>
+	<select id="queryreaderidByname" parameterType="String" resultType="ReaderPO">
+		SELECT * FROM account WHERE account_name = #{username}
+	</select>
+	<select id="queryBookByNum" parameterType="String" resultType="BookPO">
+		SELECT * FROM book WHERE book_num = #{num}
+	</select>
 	<select id="showBooks" resultMap="BookMaps">
 		SELECT * FROM book
 	</select>
 	<select id="queryBookByID" parameterType="String" resultMap="BookMaps">
 		SELECT * FROM book where book_id = #{bookId}
 	</select>
-	
 	<select id="getAllBooktypes" resultType="BooktypesPO">
 		SELECT * FROM booktypes
 	</select>
+	<update id="readerreturn" parameterType="String">
+        update reader set reader_lendnum=reader_lendnum-1 where reader_id = #{readerId}
+    </update>
+    <update id="addBookAmount" parameterType="String">
+        update book set book_amount=book_amount+1 where book_id = #{bookId}
+    </update>
 	
 	<delete id="delbook" parameterType="java.lang.Integer">
 		delete from book where book_id = #{bookId}
@@ -28,6 +53,10 @@
     <insert id="insertBook" parameterType="BookPO">
     	INSERT INTO book(book_introduction,book_num,book_price,type_id,book_amount,book_author,remark,book_labels,book_name,book_publish) 
 		VALUES(#{book_introduction},#{book_num},#{book_price},#{type_id},#{book_amount},#{book_author},#{remark},#{book_labels},#{book_name},#{book_publish}) 
+    </insert>
+    <insert id="insertReceipt" parameterType="ReceiptPO">
+    	INSERT INTO receipt(borrow_id,reader_id,receipt_type,receipt_date,receipt_money) 
+		VALUES(#{borrow_id},#{reader_id},#{receipt_type},#{receipt_date},#{receipt_money}) 
     </insert>
     <update id="updateBook" parameterType="BookPO">
     	UPDATE book 

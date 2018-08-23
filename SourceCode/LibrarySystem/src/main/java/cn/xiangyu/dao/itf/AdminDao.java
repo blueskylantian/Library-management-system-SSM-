@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Param;
 import cn.xiangyu.entity.AccountPO;
 import cn.xiangyu.entity.BookPO;
 import cn.xiangyu.entity.BooktypesPO;
+import cn.xiangyu.entity.BorrowPO;
+import cn.xiangyu.entity.ReaderPO;
+import cn.xiangyu.entity.ReceiptPO;
 import cn.xiangyu.entity.SettingPO;
 
 public interface AdminDao {
@@ -21,4 +24,11 @@ public interface AdminDao {
 	void updateBook(BookPO po);
 	void insertBook(BookPO po);
 	void delbook(int bookId);
+	List<BorrowPO> queryBorrowsByBookidAndReaderid(@Param("bookid")String bookid,@Param("readerid")String readerid);
+	ReaderPO queryreaderidByname(@Param("username")String username);
+	BookPO queryBookByNum(@Param("num")String num);
+	void readerreturn(@Param("readerId")String raderid);
+	void addBookAmount(@Param("bookId")String bookid);
+	BorrowPO queryBorrowByid(@Param("borrowid")String borrowid);
+	void insertReceipt(ReceiptPO po);
 }

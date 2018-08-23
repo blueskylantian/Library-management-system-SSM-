@@ -20,7 +20,7 @@
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="${lpath}/admin/login" method="post">
+    <form class="form form-horizontal" action="" method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
@@ -35,24 +35,38 @@
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input id="sub" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+          <button id="btu1" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">登陆</button>
+          <button name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">取消</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
+<div class="footer">大学生图书借阅管理系统</div>
+<jsp:include page="footer.jsp"></jsp:include>
 <script type="text/javascript" src="${ares}/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="${ares}/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript">
-	$("#sub").click(function(){
-    var msg = ${msg};
-    if(msg != null || msg != ''){
-      alert(msg);
-    }
+	$("#btu1").click(function(){
+    var username = $("#username").val();
+	var password = $("#password").val();
+    $.ajax({
+      type: "post",
+      url: "${lpath}/admin/login",
+      data:JSON.stringify({"username": username,"password":password}),
+      dataType: "json",
+      contentType : "application/json",
+      success: function (data) {
+    	var msg = data.msg;  
+    	if(msg.indexOf("成功") != -1){
+    		window.location.href="${lpath}/admin"
+    	}else{
+    		layer.alert(msg, {icon: 6});
+    	} 
+       
+      }
+    });
   });
-
 </script>
 </body>
 </html>

@@ -58,9 +58,16 @@ public class BorrowPO implements Serializable {
 	
 	
 	private BookPO book;
-	
-	
+	private ReaderPO reader;
 		
+	public ReaderPO getReader() {
+		return reader;
+	}
+
+	public void setReader(ReaderPO reader) {
+		this.reader = reader;
+	}
+
 	public BookPO getBook() {
 		return book;
 	}

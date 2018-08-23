@@ -4,20 +4,26 @@
 <mapper namespace="cn.xiangyu.dao.itf.ReaderDao">
 	<resultMap type="cn.xiangyu.entity.BorrowPO" id="BorrowMap">
 		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbookById" column="book_id" property="book"></association>
+		<association select="cn.xiangyu.dao.itf.ReaderDao.queryReaderById" column="reader_id" property="reader"></association>		
+	</resultMap>
+	<resultMap type="cn.xiangyu.entity.BookPO" id="BookMap">
+		<association select="cn.xiangyu.dao.itf.ReaderDao.selectbooktypeById" column="type_id" property="type"></association>
 	</resultMap>
     <select id="tempQueryBook" parameterType="string" resultType="string">
         SELECT book_name FROM book WHERE
         <if test="kw !=null and kw != ''"> book_name LIKE concat('%',#{kw},'%')</if>
     </select>
-    <select id="queryBook" parameterType="string" resultType="BookPO">
+    <select id="queryBook" parameterType="string" resultMap="BookMap">
         SELECT * FROM book 
         <where>
         <if test="name !=null and name != ''"> book_name LIKE concat('%',#{name},'%')</if>
         </where>
     </select>
-    <select id="queryBookById" parameterType="string" resultType="BookPO">
-        SELECT * FROM book WHERE book_id = #{id};  
+    
+    <select id="selectbooktypeById" resultType="BooktypesPO">
+    	SELECT * FROM booktypes where type_id = #{type_id}
     </select>
+    
     <select id="verifyAccount" parameterType="string" resultType="AccountPO">
         SELECT reader_id FROM account WHERE account_name = #{username} and account_password = #{password};  
     </select>
@@ -35,15 +41,23 @@
 		VALUES(#{reader_id},#{borrow_num},#{borrow_date},#{remark},#{book_id},#{borrow_return},#{borrow_type}) 
     </insert>
     <select id="queryBorrowByReaderId" parameterType="java.lang.Integer" resultMap="BorrowMap">
-    	 SELECT * FROM borrow where reader_id = #{readerId}
+    	 SELECT * FROM borrow where reader_id = #{readerId} and borrow_type != 1
     </select>
-    <select id="selectbookById" parameterType="java.lang.Integer" resultType="BookPO">
+    <select id="selectbookById" parameterType="java.lang.Integer" resultMap="BookMap">
 		SELECT * FROM  book where book_id = #{book_id}
 	</select>
+	
     <update id="updateBorrow" parameterType="BorrowPO">
-    	UPDATE borrow SET reader_id=#{reader_id},borrow_num=#{borrow_num},
-    	borrow_date=#{borrow_date},remark=#{remark},<if test="book_id !=null and book_id != ''">book_id=#{book_id},</if>
-    	borrow_return=#{borrow_return},borrow_type=#{borrow_type} 
+    	UPDATE 
+    	<trim prefix="set" suffixOverrides=",">
+    	<if test="reader_id !=null and reader_id != ''">reader_id=#{reader_id},</if>
+    	<if test="borrow_num !=null and borrow_num != ''">borrow_num=#{borrow_num},</if>
+    	<if test="borrow_date !=null and borrow_date != ''">borrow_date=#{borrow_date},</if>
+    	<if test="remark !=null and remark != ''">remark=#{remark},</if>
+    	<if test="book_id !=null and book_id != ''">book_id=#{book_id},</if></if>
+    	<if test="borrow_return !=null and borrow_return != ''">borrow_return=#{borrow_return},</if>
+    	<if test="borrow_type !=null and borrow_type != ''">borrow_type=#{borrow_type}</if>
+    	</trim>
     	WHERE borrow_id=#{borrow_id}
     </update>
     <update id="updateReader" parameterType="ReaderPO">
