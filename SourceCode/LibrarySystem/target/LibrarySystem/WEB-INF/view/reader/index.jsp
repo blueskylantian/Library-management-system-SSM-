@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- meta部分 -->
 <jsp:include page="meta.jsp"></jsp:include>
-<title>H-ui.admin v3.1</title>
+<title>大学生图书借阅管理系统</title>
 <meta name="keywords"
 	content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description"

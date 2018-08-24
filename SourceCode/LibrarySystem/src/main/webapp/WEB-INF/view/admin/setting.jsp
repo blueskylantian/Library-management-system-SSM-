@@ -83,8 +83,13 @@
 					</div>
 				</div>							
 			</div>
-			<div class="tabCon">
-			</div>
+			<div class="tabCon" >
+				<div style="text-align:left">
+					<button id="backSetting"  class="btn btn-secondary radius" type="button"> 退回到上一次设置</button>
+				</div>
+				<div>
+					<button id="defaultSetting"  class="btn btn-warning radius" type="button"> 还原默认设置</button>
+				</div>
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
@@ -121,6 +126,32 @@ $(function(){
 	      type: "post",
 	      url: "${lpath}/admin/saveSetting",
 	      data:JSON.stringify($("#form").serializeJSON()),
+	      dataType: "json",
+	      contentType : "application/json;charset=utf-8",
+	      success: function (data) {
+	    	  layer.msg(data.msg, { icon: 1, time: 1000 });
+	      }
+	    });
+	  });
+	$("#defaultSetting").click(function(){
+		alert(JSON.stringify($("#form").serializeJSON()));
+	    $.ajax({
+	      type: "post",
+	      url: "${lpath}/admin/defaultSetting",
+	      //data:JSON.stringify($("#form").serializeJSON()),
+	      dataType: "json",
+	      contentType : "application/json;charset=utf-8",
+	      success: function (data) {
+	    	  layer.msg(data.msg, { icon: 1, time: 1000 });
+	      }
+	    });
+	  });
+	$("#backSetting").click(function(){
+		alert(JSON.stringify($("#form").serializeJSON()));
+	    $.ajax({
+	      type: "post",
+	      url: "${lpath}/admin/backSetting",
+	      //data:JSON.stringify($("#form").serializeJSON()),
 	      dataType: "json",
 	      contentType : "application/json;charset=utf-8",
 	      success: function (data) {

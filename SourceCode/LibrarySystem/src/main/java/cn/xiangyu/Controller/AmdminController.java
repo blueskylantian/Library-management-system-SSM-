@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-
-import cn.xiangyu.dao.itf.AdminDao;
+import cn.xiangyu.dao.itf.ReaderDao;
 import cn.xiangyu.entity.BookPO;
 import cn.xiangyu.entity.BooktypesPO;
 import cn.xiangyu.entity.BorrowPO;
@@ -29,6 +27,27 @@ import net.sf.json.JSONObject;
 public class AmdminController {
 	@Autowired
 	private AdminServiceItf service;
+	
+	@ResponseBody
+	@RequestMapping("backSetting")
+	public JSONObject backSetting() {
+		String jsonMsg;
+		String msg = service.backSetting();
+		jsonMsg = "{msg:\""+msg+"\"}";
+		return JSONObject.fromObject(jsonMsg);
+	}
+	/**
+	 * 还原为默认操作
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("defaultSetting")
+	public JSONObject defaultSetting() {
+		String jsonMsg;
+		String msg = service.defaultSetting();
+		jsonMsg = "{msg:\""+msg+"\"}";
+		return JSONObject.fromObject(jsonMsg);
+	}
 	/**
 	 * 丢失图书后的操作
 	 * @param map

@@ -273,4 +273,21 @@ public class AdminServiceImpl implements AdminServiceItf {
 		return null;
 	}
 
+	@Override
+	public String defaultSetting() {
+		//获得默认配置
+		SettingPO defaultSetting = adminDao.querySettingById(1);
+		defaultSetting.setSetting_id(3);
+		adminDao.updateSetting(defaultSetting);
+		return "已更新为默认配置";
+	}
+
+	@Override
+	public String backSetting() {
+		SettingPO defaultSetting = adminDao.querySettingById(2);
+		defaultSetting.setSetting_id(3);
+		adminDao.updateSetting(defaultSetting);
+		return "已经还原为上一次的配置";
+	}
+
 }

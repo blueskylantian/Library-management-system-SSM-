@@ -24,4 +24,6 @@ public interface AdminServiceItf {
 	String checkReader(String borrowid);
 	String returnLostBook(String borrowid);
 	String insertReceipt(Double fine,String borrowid,int type);
+	String defaultSetting();
+	String backSetting();
 }
